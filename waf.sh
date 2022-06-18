@@ -13,7 +13,7 @@ print_usage()
 	echo -e "\t"$0" file [command] [shell]"
 	echo -e "file    \t - file to watch"
 	echo -e "command \t - command to execute (default: 'echo update')"
-	echo -e "shell   \t - shell to execute the command (assumed piping support) (default: 'sh -e'"
+	echo -e "shell   \t - shell to execute the command (assumed piping support) (default: 'sh -e')"
 }
 
 file=$1
