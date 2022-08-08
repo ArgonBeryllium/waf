@@ -7,9 +7,10 @@ fi
 
 SHELL_DEFAULT='sh -e'
 COMND_DEFAULT='echo update'
+DELAY_DEFAULT=.5
 print_header()
 {
-	echo "ArBe's Wack-A-File v.1.0.0"
+	echo "ArBe's Wack-A-File v.1.0.1"
 	echo "Executes a command every time a file is updated."
 }
 print_usage()
@@ -19,6 +20,7 @@ print_usage()
 	echo -e "\t file(s)       file to watch"
 	echo -e "\t -c command    command to execute (default: '$COMND_DEFAULT')"
 	echo -e "\t -s shell      shell to execute the command (assumed piping support) (default: '$SHELL_DEFAULT')"
+	echo -e "\t -t delay      sleep period between checks (default: '$DELAY_DEFAULT')"
 	echo -e "\t -v            print option values"
 	echo -e "\t -h            print this message"
 }
@@ -39,6 +41,7 @@ do
 	case $opt in
 		-c) command="$arg" ;;
 		-s) shell="$arg" ;;
+		-t) delay="$arg" ;;
 		-h) print_header && print_usage && exit ;;
 		-v) verbose=1 ;;
 		*)
@@ -60,6 +63,7 @@ done
 
 [ -z "$command" ] && command="$COMND_DEFAULT"
 [ -z "$shell" ] && shell="$SHELL_DEFAULT"
+[ -z "$delay" ] && delay="$DELAY_DEFAULT"
 
 if [ $verbose -ne 0 ]
 then
@@ -89,5 +93,5 @@ do
 			last[$i]=$new
 		fi
 	done
-	sleep .1
+	sleep $delay
 done
